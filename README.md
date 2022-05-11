@@ -2,7 +2,7 @@
 
 **Name:** Tal Saar , **ID:** 209151380
 
-#**note:** for change the number of threads in the program you need to change the variable NUM_THREADS that in file functions.h
+**#note:** for change the number of threads in the program you need to change the variable NUM_THREADS that in file functions.h
 
 **To run this program on terminal:**
 
