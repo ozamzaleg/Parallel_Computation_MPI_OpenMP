@@ -19,9 +19,7 @@ int main(int argc, char *argv[])
 
     if (rank == MASTER)
     {
-        double sumMaster = 0, sumFromSlave = 0;
-        double *numbers;
-        double t1, t2;
+        double sumMaster = 0, sumFromSlave = 0,*numbers,t1, t2;
 
         checkCorrectNumProcess(numProcs);
 
@@ -45,8 +43,7 @@ int main(int argc, char *argv[])
     else
     {
 
-        double sumSlave = 0;
-        double *workerArray;
+        double sumSlave = 0,*workerArray; 
 
         MPI_Recv(buff, BUFFER_SIZE, MPI_PACKED, MASTER, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         MPI_Unpack(buff, BUFFER_SIZE, &position, &halfSize, 1, MPI_INT, MPI_COMM_WORLD);
@@ -62,9 +59,9 @@ int main(int argc, char *argv[])
         MPI_Unpack(buff, BUFFER_SIZE, &position, workerArray, halfSize, MPI_DOUBLE, MPI_COMM_WORLD);
 
         sumSlave = getSumSubArray(halfSize, workerArray, maxIterations);
-
-        free(workerArray);
         MPI_Send(&sumSlave, 1, MPI_DOUBLE, MASTER, 0, MPI_COMM_WORLD);
+        
+        free(workerArray);
     }
 
     MPI_Finalize();
